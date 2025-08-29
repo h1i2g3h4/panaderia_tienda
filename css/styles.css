@@ -62,7 +62,7 @@ main {
   padding: 30px;
   text-align: center;
   flex: 1; /* El contenido ocupa el espacio restante */
-  background-image: url('/img/fondo.jpg');
+  background-image: url('https://dir-informatica.com/wp-content/uploads/2017/02/panificadora.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

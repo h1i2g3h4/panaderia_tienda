@@ -138,41 +138,6 @@ h2 {
   margin-bottom: 20px;
 }
 
-/* ----- GRID PRODUCTOS ----- */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-}
-
-.producto {
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  padding: 15px;
-  transition: transform 0.2s;
-  text-align: center;
-}
-
-.producto:hover {
-  transform: translateY(-5px);
-}
-
-.producto img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-  border-radius: 10px;
-}
-
-.producto h3 {
-  margin: 10px 0 5px;
-}
-
-.producto p {
-  font-weight: bold;
-  color: #d35400;
-}
 
 /* ----- BOTONES ----- */
 .btn, button {
@@ -199,3 +164,83 @@ footer {
   padding: 15px;
   margin-top: auto; /* Empuja el footer hacia abajo */
 }
+
+
+/* Panel admin */
+#admin-area {
+  background: #fafafa;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+#admin-area h2 {
+  color: #333;
+  margin-bottom: 15px;
+}
+
+#admin-area form {
+  background: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+#admin-area input, 
+#admin-area button {
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+#admin-area button {
+  background: #d35400;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+#admin-area button:hover {
+  background: #e67e22;
+}
+
+#admin-lista, #lista-fotos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
+  gap: 15px;
+}
+
+#productos {
+  display: flex;
+  flex-wrap: wrap;       /* permite que se acomoden en varias filas */
+  gap: 20px;             /* espacio entre cards */
+  justify-content: center;
+  padding: 20px;
+}
+
+.producto {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  text-align: center;
+  width: 220px;          /* ancho fijo de la card */
+  padding: 15px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.producto:hover {
+  transform: scale(1.03);
+}
+
+.producto img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+

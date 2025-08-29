@@ -74,17 +74,31 @@ async function mostrarCarrito() {
   totalEl.textContent = total.toLocaleString();
 }
 
-// Pagar (simulado)
-function pagar() {
-  const carrito = getCarrito();
-  if (Object.keys(carrito).length === 0) {
-    alert('Tu carrito está vacío.');
-    return;
-  }
-  localStorage.removeItem('carrito');
-  mostrarCarrito();
-  alert('✅ ¡Gracias por tu compra! (pago simulado)');
+async function hacerPedido() {
+  const lista = document.getElementById("lista-carrito").innerText;
+  const total = document.getElementById("total").innerText;
+
+  const cuerpo = `
+    Pedido realizado desde la página web:
+    
+    Productos:
+    ${lista}
+
+    Total: $${total}
+  `;
+
+  // Enviar usando EmailJS (más sencillo desde frontend)
+  emailjs.send("service_6nmyz5b", "template_xb13pnn", {
+    message: cuerpo,
+    from_name: "Panadería Web",
+    to_email: "fernandamonsalvebakery4@gmail.com"
+  }).then(() => {
+    alert("Pedido enviado correctamente ✅");
+  }, (err) => {
+    alert("Error al enviar pedido: " + JSON.stringify(err));
+  });
 }
+
 
 // Auto-inicializa en páginas que tengan el contenedor
 document.addEventListener('DOMContentLoaded', mostrarCarrito);

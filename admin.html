@@ -37,8 +37,17 @@
       <p id="auth-msg"></p>
     </section>
 
+    
     <!-- PANEL -->
     <section id="admin-area" style="display:none;">
+        <h2>Galería</h2>
+      <form id="add-foto" class="card" style="max-width:700px;margin:10px auto;">
+        <input type="text" id="foto-url" placeholder="URL de la foto" required />
+        <input type="text" id="foto-desc" placeholder="Descripción (opcional)" />
+        <button type="submit">Añadir foto</button>
+       </form>
+        <div id="lista-fotos" class="grid"></div>
+         
       <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;">
         <h2>Productos</h2>
         <button class="btn" id="logout">Cerrar sesión</button>

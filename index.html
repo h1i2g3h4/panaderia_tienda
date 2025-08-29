@@ -22,13 +22,54 @@
   </header>
 
   <main>
-    <h2>Frescos, caseros y con amor ❤️</h2>
-    <p>Los mejores panes, tortas y postres artesanales de tu ciudad.</p>
-    <a href="catalogo.html" class="btn">Ver Catálogo</a>
-  </main>
+  <h1>Galería de Nuestra Panadería</h1>
+
+  <div class="gallery">
+    <div class="main-image">
+      <img id="current" src="" alt="Imagen principal">
+    </div>
+    <div class="thumbnails" id="thumbnails"></div>
+  </div>
+</main>
+
 
   <footer>
     <p>&copy; 2025 Fernanda Monsalve Bakery</p>
   </footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabaseClient.js"></script>
+<script>
+  async function cargarGaleria() {
+    const { data, error } = await sb.from("galeria").select("*").order("id", { ascending: true });
+    if (error) {
+      console.error(error);
+      return;
+    }
+
+    const thumbs = document.getElementById("thumbnails");
+    const current = document.getElementById("current");
+
+    thumbs.innerHTML = data.map((img, i) => `
+      <img src="${img.url}" alt="${img.descripcion || 'Foto'}" ${i===0 ? 'class="active"' : ''}>
+    `).join('');
+
+    if (data.length > 0) {
+      current.src = data[0].url;
+      current.alt = data[0].descripcion || "Foto";
+    }
+
+    // Eventos
+    document.querySelectorAll("#thumbnails img").forEach(img => {
+      img.addEventListener("click", () => {
+        current.src = img.src;
+        current.alt = img.alt;
+
+        document.querySelectorAll("#thumbnails img").forEach(t => t.classList.remove("active"));
+        img.classList.add("active");
+      });
+    });
+  }
+  cargarGaleria();
+</script>
 </body>
 </html>

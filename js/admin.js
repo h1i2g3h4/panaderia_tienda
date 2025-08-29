@@ -80,3 +80,50 @@ window.borrarProducto = async (id) => {
 };
 
 checkSession();
+
+
+// === GESTIÓN DE GALERÍA ===
+const addFotoForm = document.getElementById("add-foto");
+const listaFotos = document.getElementById("lista-fotos");
+
+if (addFotoForm) {
+  addFotoForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const url = document.getElementById("foto-url").value;
+    const desc = document.getElementById("foto-desc").value;
+
+    const { error } = await sb.from("galeria").insert([{ url, descripcion: desc }]);
+    if (error) {
+      alert("Error: " + error.message);
+      return;
+    }
+    addFotoForm.reset();
+    cargarFotos();
+  });
+}
+
+async function cargarFotos() {
+  const { data, error } = await sb.from("galeria").select("*").order("id", { ascending: true });
+  if (error) {
+    listaFotos.textContent = error.message;
+    return;
+  }
+  listaFotos.innerHTML = data.map(f => `
+    <div class="foto">
+      <img src="${f.url}" alt="${f.descripcion || ''}" style="width:150px;height:100px;object-fit:cover;">
+      <p>${f.descripcion || ''}</p>
+      <button onclick="eliminarFoto(${f.id})">Eliminar</button>
+    </div>
+  `).join('');
+}
+
+async function eliminarFoto(id) {
+  const { error } = await sb.from("galeria").delete().eq("id", id);
+  if (error) {
+    alert("Error: " + error.message);
+    return;
+  }
+  cargarFotos();
+}
+
+cargarFotos();

@@ -2,12 +2,13 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Carrito - Panadería Delicias</title>
+  <title>Carrito - Fernanda Monsalve Bakery</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
   <header>
-    <h1>Carrito de Compras</h1>
+    <img src="img/logo.png" alt="Logo Panadería" class="logo">
+    <h1 >Carrito de Compras</h1>
     <nav>
       <ul>
         <li><a href="index.html">Inicio</a></li>
@@ -19,15 +20,20 @@
     </nav>
   </header>
 
-  <main>
-    <div id="lista-carrito"></div>
-    <h3>Total: $<span id="total">0</span></h3>
-  </main>
+ <main>
+  <div id="lista-carrito" class="grid"></div>
+  <h3>Total: $<span id="total">0</span></h3>
+  <button class="btn" onclick="pagar()">Pagar</button>
+</main>
 
   <footer>
-    <p>&copy; 2025 Panadería Delicias</p>
+    <p>&copy; 2025 Fernanda Monsalve Bakery</p>
   </footer>
 
   <script src="js/carrito.js"></script>
+<!-- Al final del body -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabaseClient.js"></script>
+<script src="js/carrito.js"></script>
 </body>
 </html>

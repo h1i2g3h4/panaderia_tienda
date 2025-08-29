@@ -2,11 +2,12 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Catálogo - Panadería Delicias</title>
+  <title>Catálogo - Fernanda Monsalve Bakery</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
   <header>
+    <img src="img/logo.png" alt="Logo Panadería" class="logo">
     <h1>Catálogo</h1>
     <nav>
       <ul>
@@ -24,9 +25,35 @@
   </main>
 
   <footer>
-    <p>&copy; 2025 Panadería Delicias</p>
+    <p>&copy; 2025 Fernanda Monsalve Bakery</p>
   </footer>
 
   <script src="js/carrito.js"></script>
+<!-- al final del body de catalogo.html -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabaseClient.js"></script>
+<script>
+  async function cargarCatalogo() {
+    const cont = document.getElementById("productos");
+    cont.innerHTML = "Cargando...";
+    const { data, error } = await sb.from('productos')
+      .select('*')
+      .eq('activo', true)
+      .order('id', { ascending: true });
+
+    if (error) { cont.textContent = error.message; return; }
+
+    cont.innerHTML = data.map(p => `
+      <div class="producto">
+        <img src="${p.imagen || 'img/producto1.jpg'}" alt="${p.nombre}">
+        <h3>${p.nombre}</h3>
+        <p>$${Number(p.precio).toLocaleString()}</p>
+        <button onclick="agregarAlCarrito(${p.id})">Agregar</button>
+      </div>
+    `).join('');
+  }
+  cargarCatalogo();
+</script>
+<script src="js/carrito.js"></script>
 </body>
 </html>

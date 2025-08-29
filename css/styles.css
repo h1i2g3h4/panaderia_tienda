@@ -1,66 +1,136 @@
+/* Importar fuentes bonitas */
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;600&display=swap');
+
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Poppins', sans-serif;
   margin: 0; padding: 0;
-  background: #fdf6e3;
+  background: #fff8f0;
   color: #333;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
+/* ----- HEADER ----- */
 header {
-  background: #d35400;
+  background: linear-gradient(135deg, #ee14c6, #6702ff);
   color: white;
-  padding: 15px;
-  text-align: center;
+  display: flex;
+  justify-content: space-between; /* Logo a la izquierda, menú a la derecha */
+  align-items: center;            /* Alinea todo verticalmente al centro */
+   padding: 5px 20px;   /* Reducimos el padding vertical */
+    height: 70px;        /* Ajusta la altura total del header */
+
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
-.logo { width: 70px; }
+header h1 {
+  font-family: 'Dancing Script', cursive;
+  font-size: 2.5em;
+  margin: 0px 0px;
+}
+
+.logo { width:200px ; height:90px ; float: left; }
 
 nav ul {
   list-style: none;
   padding: 0;
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
+  margin: 0px 0px 0px 0px;
+  float: right;
 }
 
 nav ul li {
-  margin: 0 10px;
+  margin: 5px 15px;
 }
 
 nav a {
   color: white;
   text-decoration: none;
-  font-weight: bold;
+  font-weight: 600;
+  transition: 0.3s;
 }
 
-main { padding: 20px; text-align: center; }
+nav a:hover {
+  text-decoration: underline;
+}
 
+/* ----- MAIN ----- */
+main {
+  padding: 30px;
+  text-align: center;
+  flex: 1; /* El contenido ocupa el espacio restante */
+  background-image: url('/img/fondo.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+h2 {
+  font-family: 'Dancing Script', cursive;
+  font-size: 2.2em;
+  margin-bottom: 20px;
+}
+
+/* ----- GRID PRODUCTOS ----- */
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 15px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
 }
 
 .producto {
-  border: 1px solid #ccc;
-  padding: 10px;
   background: white;
-  border-radius: 8px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  padding: 15px;
+  transition: transform 0.2s;
 }
 
-.producto img { width: 100%; height: 150px; object-fit: cover; }
+.producto:hover {
+  transform: translateY(-5px);
+}
 
+.producto img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.producto h3 {
+  margin: 10px 0 5px;
+}
+
+.producto p {
+  font-weight: bold;
+  color: #d35400;
+}
+
+/* ----- BOTONES ----- */
 .btn, button {
   background: #e67e22;
   color: white;
-  padding: 10px;
+  padding: 10px 18px;
   border: none;
+  border-radius: 8px;
   cursor: pointer;
-  border-radius: 6px;
+  font-weight: bold;
+  transition: 0.3s;
+  margin-top: 10px;
 }
 
-footer {
+.btn:hover, button:hover {
   background: #d35400;
+}
+
+/* ----- FOOTER ----- */
+footer {
+  background: linear-gradient(135deg, #ee14c6, #6702ff);
   color: white;
   text-align: center;
-  padding: 10px;
-  margin-top: 20px;
+  padding: 15px;
+  margin-top: auto; /* Empuja el footer hacia abajo */
 }

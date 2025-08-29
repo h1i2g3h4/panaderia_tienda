@@ -1,5 +1,0 @@
-[
-  { "id": 1, "nombre": "Mantecada Tradicional", "precio": 2500, "imagen": "img/producto1.jpg" },
-  { "id": 2, "nombre": "Pan de Chocolate", "precio": 3500, "imagen": "img/producto2.jpg" },
-  { "id": 3, "nombre": "Torta Tres Leches", "precio": 12000, "imagen": "img/producto3.jpg" }
-]

@@ -2,12 +2,37 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Fernanda monsalve bakery</title>
+  <title>Fernanda Monsalve Bakery</title>
   <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* 👇 Card solo para el título */
+    .titulo-card {
+      background: #fff;
+      padding: 15px 30px;
+      border-radius: 20px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+      font-family: 'Dancing Script', cursive;
+      font-size: 2.8rem;
+      margin-bottom: 30px;
+      text-align: center;
+      color: #6702ff;
+      display: inline-block;
+    }
+
+    main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 30px;
+      text-align: center;
+      flex: 1;
+    }
+  </style>
 </head>
 <body>
   <header>
-    <img src="img/logo.png" alt="Logo Panadería" class="logo" >
+    <img src="img/logo.png" alt="Logo Panadería" class="logo">
     <h1>Fernanda Monsalve Bakery</h1>
     <nav>
       <ul>
@@ -22,54 +47,36 @@
   </header>
 
   <main>
-  <h1>Galería de Nuestra Panadería</h1>
+    <!-- 👇 Título dentro de su card -->
+    <h1 class="titulo-card">Nuestra Panificadora</h1>
 
-  <div class="gallery">
-    <div class="main-image">
-      <img id="current" src="" alt="Imagen principal">
-    </div>
-    <div class="thumbnails" id="thumbnails"></div>
-  </div>
-</main>
-
+    <div class="galeria-cards" id="thumbnails"></div>
+  </main>
 
   <footer>
     <p>&copy; 2025 Fernanda Monsalve Bakery</p>
   </footer>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="js/supabaseClient.js"></script>
-<script>
-  async function cargarGaleria() {
-    const { data, error } = await sb.from("galeria").select("*").order("id", { ascending: true });
-    if (error) {
-      console.error(error);
-      return;
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabaseClient.js"></script>
+  <script>
+    async function cargarGaleria() {
+      const { data, error } = await sb.from("galeria").select("*").order("id", { ascending: true });
+      if (error) {
+        console.error(error);
+        return;
+      }
+
+      const thumbs = document.getElementById("thumbnails");
+
+      thumbs.innerHTML = data.map(img => `
+        <div class="card">
+          <img src="${img.url}" alt="${img.descripcion || 'Foto'}">
+          <h3>${img.descripcion || 'Foto'}</h3>
+        </div>
+      `).join('');
     }
-
-    const thumbs = document.getElementById("thumbnails");
-    const current = document.getElementById("current");
-
-    thumbs.innerHTML = data.map((img, i) => `
-      <img src="${img.url}" alt="${img.descripcion || 'Foto'}" ${i===0 ? 'class="active"' : ''}>
-    `).join('');
-
-    if (data.length > 0) {
-      current.src = data[0].url;
-      current.alt = data[0].descripcion || "Foto";
-    }
-
-    // Eventos
-    document.querySelectorAll("#thumbnails img").forEach(img => {
-      img.addEventListener("click", () => {
-        current.src = img.src;
-        current.alt = img.alt;
-
-        document.querySelectorAll("#thumbnails img").forEach(t => t.classList.remove("active"));
-        img.classList.add("active");
-      });
-    });
-  }
-  cargarGaleria();
-</script>
+    cargarGaleria();
+  </script>
 </body>
 </html>

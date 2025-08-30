@@ -6,9 +6,10 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+  <!-- Header -->
   <header>
     <img src="img/logo.png" alt="Logo Panadería" class="logo">
-    <h1>Pedidos</h1>
+    <h1>Carrito</h1>
     <nav>
       <ul>
         <li><a href="index.html">Inicio</a></li>
@@ -20,135 +21,89 @@
     </nav>
   </header>
 
- <main>
-  <div id="lista-carrito" class="grid"></div>
-  <h3>Total: $<span id="total">0</span></h3>
-   <h2>Personalización de tortas</h2>
-<form id="form-personalizado">
-  <label>Tipo de torta:
-    <select id="tipo">
-      <option>Bizcocho</option>
-      <option>Red Velvet</option>
-      <option>Chocolate</option>
-      <option>Vainilla</option>
-    </select>
-  </label><br>
+  <!-- Main -->
+  <main class="carrito-main">
+    <!-- Card del carrito -->
+    <div class="carrito-card">
+      <h2>Mi Carrito</h2>
+      <div id="lista-carrito" class="grid"></div>
+      <h3>Total: $<span id="total">0</span></h3>
+    </div>
 
-  <label>Porciones:
-    <select id="porciones">
-      <option>10</option>
-      <option>20</option>
-      <option>30</option>
-    </select>
-  </label><br>
+    <!-- Card de personalización -->
+    <div class="personalizacion-card">
+      <h2>Personalización de tortas</h2>
+      <form id="form-personalizado">
+        <label>Tipo de torta:
+          <select id="tipo">
+            <option>Bizcocho</option>
+            <option>Red Velvet</option>
+            <option>Chocolate</option>
+            <option>Vainilla</option>
+          </select>
+        </label><br>
 
-  <label>Sabor:
-    <select id="sabor">
-      <option>Chocolate</option>
-      <option>Vainilla</option>
-      <option>Fresa</option>
-      <option>Mixto</option>
-    </select>
-  </label><br>
+        <label>Porciones:
+          <select id="porciones">
+            <option>10</option>
+            <option>20</option>
+            <option>30</option>
+          </select>
+        </label><br>
 
-  <label>Relleno:
-    <select id="relleno">
-      <option>Arequipe</option>
-      <option>Crema</option>
-      <option>Frutas</option>
-    </select>
-  </label><br>
+        <label>Sabor:
+          <select id="sabor">
+            <option>Chocolate</option>
+            <option>Vainilla</option>
+            <option>Fresa</option>
+            <option>Mixto</option>
+          </select>
+        </label><br>
 
-  <label>Color de decoración:
-    <select id="color">
-      <option>Blanco</option>
-      <option>Rosa</option>
-      <option>Azul</option>
-      <option>Dorado</option>
-    </select>
-  </label><br>
+        <label>Relleno:
+          <select id="relleno">
+            <option>Arequipe</option>
+            <option>Crema</option>
+            <option>Frutas</option>
+          </select>
+        </label><br>
 
-  <label>Temática:
-    <select id="tematica">
-      <option>Infantil</option>
-      <option>Bodas</option>
-      <option>Cumpleaños</option>
-      <option>Aniversario</option>
-    </select>
-  </label><br>
+        <label>Color de decoración:
+          <select id="color">
+            <option>Blanco</option>
+            <option>Rosa</option>
+            <option>Azul</option>
+            <option>Dorado</option>
+          </select>
+        </label><br>
 
-  <label>Imagen de referencia:
-    <input type="file" id="imagenRef" />
-  </label>
-</form>
+        <label>Temática:
+          <select id="tematica">
+            <option>Infantil</option>
+            <option>Bodas</option>
+            <option>Cumpleaños</option>
+            <option>Aniversario</option>
+          </select>
+        </label><br>
 
-  <button class="btn" onclick="hacerPedido()">Hacer pedido</button>
+        <label>Imagen de referencia:
+          <input type="file" id="imagenRef" />
+        </label>
+      </form>
 
-</main>
+      <button class="btn" onclick="hacerPedido()">Hacer pedido</button>
+    </div>
+  </main>
 
+  <!-- Footer -->
   <footer>
     <p>&copy; 2025 Fernanda Monsalve Bakery</p>
   </footer>
 
+  <!-- Scripts -->
   <script src="js/carrito.js"></script>
-<!-- Al final del body -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="js/supabaseClient.js"></script>
-<script src="js/carrito.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
-<script>
-  (function() {
-    emailjs.init("48bGLXBL41rKsHZm-"); // Clave pública de tu cuenta
-  })();
-
-  function hacerPedido() {
-  const lista = document.getElementById("lista-carrito").innerText;
-  const total = document.getElementById("total").innerText;
-
-  // 🔹 Capturamos los datos de personalización
-  const tipo = document.getElementById("tipo").value;
-  const porciones = document.getElementById("porciones").value;
-  const sabor = document.getElementById("sabor").value;
-  const relleno = document.getElementById("relleno").value;
-  const color = document.getElementById("color").value;
-  const tematica = document.getElementById("tematica").value;
-
-  // 🔹 Armamos el cuerpo completo del pedido
-  const cuerpo = `
-    Pedido realizado desde la página web:
-
-    Productos:
-    ${lista}
-
-    Total: $${total}
-
-    --- Personalización ---
-    Tipo: ${tipo}
-    Porciones: ${porciones}
-    Sabor: ${sabor}
-    Relleno: ${relleno}
-    Color: ${color}
-    Temática: ${tematica}
-  `;
-
-  // 🔹 Enviamos por EmailJS
-  const templateParams = {
-    message: cuerpo,
-    from_name: "Cliente Web",
-    to_email: "fernandamonsalvebakery4@gmail.com"
-  };
-
-  emailjs.send("service_6nmyz5b", "template_xb13pnnD", templateParams)
-    .then(() => {
-      alert("✅ Pedido enviado por correo");
-    })
-    .catch((err) => {
-      alert("❌ Error al enviar pedido: " + JSON.stringify(err));
-    });
-}
-
-</script>
-
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabaseClient.js"></script>
+  <script src="js/pedidos.js"></script>
 </body>
 </html>
